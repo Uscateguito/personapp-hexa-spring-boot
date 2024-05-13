@@ -1,6 +1,6 @@
 package co.edu.javeriana.as.personapp.mongo.adapter;
 
-import co.edu.javeriana.as.personapp.application.port.out.StudiesOutputPort;
+import co.edu.javeriana.as.personapp.application.port.out.StudyOutputPort;
 import co.edu.javeriana.as.personapp.common.annotations.Adapter;
 import co.edu.javeriana.as.personapp.domain.Study;
 import co.edu.javeriana.as.personapp.mongo.document.EstudiosDocument;
@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Adapter("EstudiosOutputAdapterMongo")
-public class EstudiosOutputAdapterMongo implements StudiesOutputPort {
+@Adapter("StudyOutputAdapterMongo")
+public class StudyOutputAdapterMongo implements StudyOutputPort {
 
     @Autowired
     private EstudiosRepositoryMongo estudiosRepositoryMongo;
@@ -56,10 +56,11 @@ public class EstudiosOutputAdapterMongo implements StudiesOutputPort {
     }
 
     @Override
-    public Study findById(Integer identification) {
+    public Study findById(Integer professionId, Integer personId) {
 //        TODO Auto-generated method stub
         return null;
     }
+
 
 //    @Override
 //    public Study findById(String identification) {

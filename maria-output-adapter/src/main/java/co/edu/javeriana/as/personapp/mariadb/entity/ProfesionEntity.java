@@ -1,5 +1,9 @@
 package co.edu.javeriana.as.personapp.mariadb.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -18,6 +22,8 @@ import javax.persistence.Table;
  * @author aasanchez
  */
 @Entity
+@Getter
+@Setter
 @Table(name="profesion", catalog = "persona_db", schema = "")
 @NamedQueries({ @NamedQuery(name = "ProfesionEntity.findAll", query = "SELECT p FROM ProfesionEntity p"),
 		@NamedQuery(name = "ProfesionEntity.findById", query = "SELECT p FROM ProfesionEntity p WHERE p.id = :id"),
@@ -36,6 +42,7 @@ public class ProfesionEntity implements Serializable {
 	@Column(length = 65535)
 	private String des;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "profesion")
+	@JsonIgnore
 	private List<EstudiosEntity> estudios;
 
 	public ProfesionEntity() {

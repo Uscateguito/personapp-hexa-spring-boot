@@ -1,6 +1,6 @@
 package co.edu.javeriana.as.personapp.mariadb.adapter;
 
-import co.edu.javeriana.as.personapp.application.port.out.ProfesionOutputPort;
+import co.edu.javeriana.as.personapp.application.port.out.ProfessionOutputPort;
 import co.edu.javeriana.as.personapp.common.annotations.Adapter;
 import co.edu.javeriana.as.personapp.domain.Profession;
 import co.edu.javeriana.as.personapp.mariadb.entity.ProfesionEntity;
@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Adapter("ProfesionOutputAdapterMaria")
+@Adapter("ProfessionOutputAdapterMaria")
 @Transactional
-public class ProfesionOutputAdapterMaria implements ProfesionOutputPort {
+public class ProfessionOutputAdapterMaria implements ProfessionOutputPort {
 
     @Autowired
     private ProfesionRepositoryMaria profesionRepositoryMaria;

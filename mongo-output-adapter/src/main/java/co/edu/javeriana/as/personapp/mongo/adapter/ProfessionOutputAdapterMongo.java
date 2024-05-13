@@ -1,10 +1,8 @@
 package co.edu.javeriana.as.personapp.mongo.adapter;
 
-import co.edu.javeriana.as.personapp.application.port.out.ProfesionOutputPort;
+import co.edu.javeriana.as.personapp.application.port.out.ProfessionOutputPort;
 import co.edu.javeriana.as.personapp.common.annotations.Adapter;
-import co.edu.javeriana.as.personapp.domain.Person;
 import co.edu.javeriana.as.personapp.domain.Profession;
-import co.edu.javeriana.as.personapp.mongo.document.PersonaDocument;
 import co.edu.javeriana.as.personapp.mongo.document.ProfesionDocument;
 import co.edu.javeriana.as.personapp.mongo.mapper.ProfesionMapperMongo;
 import co.edu.javeriana.as.personapp.mongo.repository.ProfesionRepositoryMongo;
@@ -16,8 +14,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Adapter("ProfesionOutputAdapterMongo")
-public class ProfesionOutputAdapterMongo implements ProfesionOutputPort {
+@Adapter("ProfessionOutputAdapterMongo")
+public class ProfessionOutputAdapterMongo implements ProfessionOutputPort {
 
     @Autowired
     private ProfesionRepositoryMongo profesionRepositoryMongo;

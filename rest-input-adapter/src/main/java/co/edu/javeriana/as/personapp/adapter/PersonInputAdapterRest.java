@@ -14,16 +14,15 @@ import co.edu.javeriana.as.personapp.application.usecase.PersonUseCase;
 import co.edu.javeriana.as.personapp.common.annotations.Adapter;
 import co.edu.javeriana.as.personapp.common.exceptions.InvalidOptionException;
 import co.edu.javeriana.as.personapp.common.setup.DatabaseOption;
-import co.edu.javeriana.as.personapp.domain.Gender;
 import co.edu.javeriana.as.personapp.domain.Person;
-import co.edu.javeriana.as.personapp.mapper.PersonaMapperRest;
-import co.edu.javeriana.as.personapp.model.request.PersonaRequest;
-import co.edu.javeriana.as.personapp.model.response.PersonaResponse;
+import co.edu.javeriana.as.personapp.mapper.PersonMapperRest;
+import co.edu.javeriana.as.personapp.model.request.PersonRequest;
+import co.edu.javeriana.as.personapp.model.response.PersonResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Adapter
-public class PersonaInputAdapterRest {
+public class PersonInputAdapterRest {
 
 	@Autowired
 	@Qualifier("personOutputAdapterMaria")
@@ -34,7 +33,7 @@ public class PersonaInputAdapterRest {
 	private PersonOutputPort personOutputPortMongo;
 
 	@Autowired
-	private PersonaMapperRest personaMapperRest;
+	private PersonMapperRest personMapperRest;
 
 	PersonInputPort personInputPort;
 
@@ -50,28 +49,28 @@ public class PersonaInputAdapterRest {
 		}
 	}
 
-	public List<PersonaResponse> historial(String database) {
+	public List<PersonResponse> historial(String database) {
 		log.info("Into historial PersonaEntity in Input Adapter");
 		try {
 			if(setPersonOutputPortInjection(database).equalsIgnoreCase(DatabaseOption.MARIA.toString())){
-				return personInputPort.findAll().stream().map(personaMapperRest::fromDomainToAdapterRestMaria)
+				return personInputPort.findAll().stream().map(personMapperRest::fromDomainToAdapterRestMaria)
 						.collect(Collectors.toList());
 			}else {
-				return personInputPort.findAll().stream().map(personaMapperRest::fromDomainToAdapterRestMongo)
+				return personInputPort.findAll().stream().map(personMapperRest::fromDomainToAdapterRestMongo)
 						.collect(Collectors.toList());
 			}
 			
 		} catch (InvalidOptionException e) {
 			log.warn(e.getMessage());
-			return new ArrayList<PersonaResponse>();
+			return new ArrayList<PersonResponse>();
 		}
 	}
 
-	public PersonaResponse crearPersona(PersonaRequest request) {
+	public PersonResponse crearPersona(PersonRequest request) {
 		try {
 			setPersonOutputPortInjection(request.getDatabase());
-			Person person = personInputPort.create(personaMapperRest.fromAdapterToDomain(request));
-			return personaMapperRest.fromDomainToAdapterRestMaria(person);
+			Person person = personInputPort.create(personMapperRest.fromAdapterToDomain(request));
+			return personMapperRest.fromDomainToAdapterRestMaria(person);
 		} catch (InvalidOptionException e) {
 			log.warn(e.getMessage());
 			//return new PersonaResponse("", "", "", "", "", "", "");
@@ -95,13 +94,13 @@ public class PersonaInputAdapterRest {
         return -1;
     }
 
-	public PersonaResponse getById(Integer identification, String upperCase) {
+	public PersonResponse getById(Integer identification, String upperCase) {
 		try {
 			if(setPersonOutputPortInjection(upperCase).equalsIgnoreCase(DatabaseOption.MARIA.toString())){
 				log.info("Into getById in PersonaInputAdapterRest with MariaDB");
-				return personaMapperRest.fromDomainToAdapterRestMaria(personInputPort.findOne(identification));
+				return personMapperRest.fromDomainToAdapterRestMaria(personInputPort.findOne(identification));
 			}else {
-				return personaMapperRest.fromDomainToAdapterRestMongo(personInputPort.findOne(identification));
+				return personMapperRest.fromDomainToAdapterRestMongo(personInputPort.findOne(identification));
 			}
 		} catch (InvalidOptionException e) {
 
@@ -166,12 +165,12 @@ public class PersonaInputAdapterRest {
 		}
 	}
 
-	public PersonaResponse editarPersona(Integer identification, PersonaRequest request, String upperCase) {
+	public PersonResponse editarPersona(Integer identification, PersonRequest request, String upperCase) {
 		try {
 			if(setPersonOutputPortInjection(upperCase).equalsIgnoreCase(DatabaseOption.MARIA.toString())){
-				return personaMapperRest.fromDomainToAdapterRestMaria(personInputPort.edit(identification, personaMapperRest.fromAdapterToDomain(request)));
+				return personMapperRest.fromDomainToAdapterRestMaria(personInputPort.edit(identification, personMapperRest.fromAdapterToDomain(request)));
 			}else {
-				return personaMapperRest.fromDomainToAdapterRestMongo(personInputPort.edit(identification, personaMapperRest.fromAdapterToDomain(request)));
+				return personMapperRest.fromDomainToAdapterRestMongo(personInputPort.edit(identification, personMapperRest.fromAdapterToDomain(request)));
 			}
 		} catch (InvalidOptionException e) {
 			log.warn(e.getMessage());

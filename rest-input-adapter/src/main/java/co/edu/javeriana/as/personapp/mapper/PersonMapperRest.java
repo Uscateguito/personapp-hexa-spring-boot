@@ -3,21 +3,21 @@ package co.edu.javeriana.as.personapp.mapper;
 import co.edu.javeriana.as.personapp.common.annotations.Mapper;
 import co.edu.javeriana.as.personapp.domain.Gender;
 import co.edu.javeriana.as.personapp.domain.Person;
-import co.edu.javeriana.as.personapp.model.request.PersonaRequest;
-import co.edu.javeriana.as.personapp.model.response.PersonaResponse;
+import co.edu.javeriana.as.personapp.model.request.PersonRequest;
+import co.edu.javeriana.as.personapp.model.response.PersonResponse;
 
 @Mapper
-public class PersonaMapperRest {
+public class PersonMapperRest {
 	
-	public PersonaResponse fromDomainToAdapterRestMaria(Person person) {
+	public PersonResponse fromDomainToAdapterRestMaria(Person person) {
 		return fromDomainToAdapterRest(person, "MariaDB");
 	}
-	public PersonaResponse fromDomainToAdapterRestMongo(Person person) {
+	public PersonResponse fromDomainToAdapterRestMongo(Person person) {
 		return fromDomainToAdapterRest(person, "MongoDB");
 	}
 	
-	public PersonaResponse fromDomainToAdapterRest(Person person, String database) {
-		return new PersonaResponse(
+	public PersonResponse fromDomainToAdapterRest(Person person, String database) {
+		return new PersonResponse(
 				person.getIdentification()+"", 
 				person.getFirstName(), 
 				person.getLastName(), 
@@ -27,7 +27,7 @@ public class PersonaMapperRest {
 				"OK");
 	}
 
-	public Person fromAdapterToDomain(PersonaRequest request) {
+	public Person fromAdapterToDomain(PersonRequest request) {
 //		IMPLEMENTAR
 		try {
 			return Person.builder()

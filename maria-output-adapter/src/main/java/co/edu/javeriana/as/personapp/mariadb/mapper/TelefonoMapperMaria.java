@@ -1,5 +1,6 @@
 package co.edu.javeriana.as.personapp.mariadb.mapper;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import co.edu.javeriana.as.personapp.common.annotations.Mapper;
@@ -10,6 +11,7 @@ import co.edu.javeriana.as.personapp.mariadb.entity.TelefonoEntity;
 import lombok.NonNull;
 
 @Mapper
+@Slf4j
 public class TelefonoMapperMaria {
 
 	@Autowired
@@ -28,6 +30,7 @@ public class TelefonoMapperMaria {
 	}
 
 	public Phone fromAdapterToDomain(TelefonoEntity telefonoEntity) {
+		log.info("Into fromAdapterToDomain in TelefonoMapperMaria");
 		Phone phone = new Phone();
 		phone.setNumber(telefonoEntity.getNum());
 		phone.setCompany(telefonoEntity.getOper());

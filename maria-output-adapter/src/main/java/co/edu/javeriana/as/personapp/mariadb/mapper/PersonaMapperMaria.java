@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import co.edu.javeriana.as.personapp.common.annotations.Mapper;
@@ -17,6 +18,7 @@ import co.edu.javeriana.as.personapp.mariadb.entity.TelefonoEntity;
 import lombok.NonNull;
 
 @Mapper
+@Slf4j
 public class PersonaMapperMaria {
 
 	@Autowired
@@ -58,6 +60,8 @@ public class PersonaMapperMaria {
 	}
 
 	public Person fromAdapterToDomain(PersonaEntity personaEntity) {
+		log.info("Into fromAdapterToDomain in PersonaMapperMaria");
+		log.info("PersonaEntity: " + personaEntity);
 		Person person = new Person();
 		person.setIdentification(personaEntity.getCc());
 		person.setFirstName(personaEntity.getNombre());
@@ -74,7 +78,7 @@ public class PersonaMapperMaria {
 	}
 
 	private Integer validateAge(Integer edad) {
-		return edad != null && edad >= 0 ? edad : null;
+		return edad != null && edad >= 0 ? edad : 200;
 	}
 
 //	private List<Study> validateStudies(List<EstudiosEntity> estudiosEntity) {

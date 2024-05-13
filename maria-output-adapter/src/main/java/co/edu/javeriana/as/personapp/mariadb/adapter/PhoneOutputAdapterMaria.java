@@ -26,7 +26,7 @@ public class PhoneOutputAdapterMaria implements PhoneOutputPort {
     private TelefonoMapperMaria telefonoMapperMaria;
 
     public Phone save(Phone telefono) {
-        log.debug("Into save on Adapter MariaDB");
+        log.info("Into save on Adapter MariaDB");
         TelefonoEntity persistedTelefono = telefonoRepositoryMaria.save(telefonoMapperMaria.fromDomainToAdapter(telefono));
         return telefonoMapperMaria.fromAdapterToDomain(persistedTelefono);
     }
@@ -37,19 +37,19 @@ public class PhoneOutputAdapterMaria implements PhoneOutputPort {
 //    }
 
     public Boolean delete(String id) {
-        log.debug("Into delete on Adapter MariaDB");
+        log.info("Into delete on Adapter MariaDB");
         telefonoRepositoryMaria.deleteById(id);
         return telefonoRepositoryMaria.findById(id).isEmpty();
     }
 
     public List<Phone> find() {
-        log.debug("Into find on Adapter MariaDB");
+        log.info("Into find on PhoneOutputAdapterMaria");
         return telefonoRepositoryMaria.findAll().stream().map(telefonoMapperMaria::fromAdapterToDomain).collect(Collectors.toList());
     }
 
     @Override
     public Phone findByNumber(String number) {
-        log.debug("Into findById on Adapter MariaDB");
+        log.info("Into findById on Adapter MariaDB");
         if (telefonoRepositoryMaria.findById(number).isEmpty
                 ()) {
             return null;

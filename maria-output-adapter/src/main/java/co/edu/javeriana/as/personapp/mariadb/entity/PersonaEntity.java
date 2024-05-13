@@ -1,9 +1,7 @@
 package co.edu.javeriana.as.personapp.mariadb.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,7 +21,8 @@ import javax.persistence.NamedQuery;
  * @author aasanchez
  */
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @Table(name="persona", catalog = "persona_db", schema = "")
 @NamedQueries({ @NamedQuery(name = "PersonaEntity.findAll", query = "SELECT p FROM PersonaEntity p"),

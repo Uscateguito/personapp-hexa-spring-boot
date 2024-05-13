@@ -6,7 +6,7 @@ import co.edu.javeriana.as.personapp.domain.Profession;
 import java.util.List;
 
 @Port
-public interface ProfesionOutputPort {
+public interface ProfessionOutputPort {
 
     public Profession save(Profession profesion);
     public Boolean delete(Integer identification);

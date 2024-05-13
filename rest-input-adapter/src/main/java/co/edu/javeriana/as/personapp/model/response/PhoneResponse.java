@@ -5,18 +5,18 @@ import co.edu.javeriana.as.personapp.model.request.PhoneRequest;
 
 public class PhoneResponse extends PhoneRequest {
 
-    private String status;
+        private String status;
 
-    public PhoneResponse(String number, String company, Person owner, String status) {
-        super(number, company, owner);
-        this.status = status;
-    }
+        public PhoneResponse(String number, String company, String ownerId, String database, String status) {
+            super(number, company, ownerId, database);
+            this.status = status;
+        }
 
-    public String getStatus() {
-        return status;
-    }
+        public String getStatus() {
+            return status;
+        }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+        public void setStatus(String status) {
+            this.status = status;
+        }
 }

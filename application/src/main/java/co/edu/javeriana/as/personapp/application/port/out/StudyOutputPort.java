@@ -6,12 +6,12 @@ import co.edu.javeriana.as.personapp.domain.Study;
 import java.util.List;
 
 @Port
-public interface StudiesOutputPort {
+public interface StudyOutputPort {
 
         public Study save(Study study);
         public Boolean delete(Integer identification);
         public List<Study> find();
-        public Study findById(Integer identification);
+        public Study findById(Integer professionId, Integer personId);
         public Long count();
 
 }

@@ -1,5 +1,9 @@
 package co.edu.javeriana.as.personapp.mariadb.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,6 +23,8 @@ import javax.persistence.TemporalType;
  * @author aasanchez
  */
 @Entity
+@Getter
+@Setter
 @Table(name="estudios", catalog = "persona_db", schema = "")
 @NamedQueries({ @NamedQuery(name = "EstudiosEntity.findAll", query = "SELECT e FROM EstudiosEntity e"),
 		@NamedQuery(name = "EstudiosEntity.findByIdProf", query = "SELECT e FROM EstudiosEntity e WHERE e.estudiosEntityPK.idProf = :idProf"),
@@ -34,9 +40,11 @@ public class EstudiosEntity implements Serializable {
 	private Date fecha;
 	@Column(length = 50)
 	private String univer;
+
 	@JoinColumn(name = "cc_per", referencedColumnName = "cc", nullable = false, insertable = false, updatable = false)
 	@ManyToOne(optional = false)
 	private PersonaEntity persona;
+
 	@JoinColumn(name = "id_prof", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
 	@ManyToOne(optional = false)
 	private ProfesionEntity profesion;
