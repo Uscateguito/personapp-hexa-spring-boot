@@ -61,8 +61,7 @@ public class ProfessionOutputAdapterMongo implements ProfessionOutputPort {
 
     @Override
     public Long count() {
-        // TODO Auto-generated method stub
-        return null;
+        return profesionRepositoryMongo.count();
     }
 
 

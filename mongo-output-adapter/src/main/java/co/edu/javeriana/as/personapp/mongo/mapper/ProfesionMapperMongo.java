@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import co.edu.javeriana.as.personapp.common.annotations.Mapper;
@@ -13,16 +14,19 @@ import co.edu.javeriana.as.personapp.mongo.document.EstudiosDocument;
 import co.edu.javeriana.as.personapp.mongo.document.ProfesionDocument;
 
 @Mapper
+@Slf4j
 public class ProfesionMapperMongo {
 	
 	@Autowired
 	private EstudiosMapperMongo estudiosMapperMongo;
 
 	public ProfesionDocument fromDomainToAdapter(Profession profession) {
+		log.info("Into fromDomainToAdapter on ProfesionMapperMongo");
 		ProfesionDocument profesionDocument = new ProfesionDocument();
-		profesionDocument.setId(profession.getIdentification());
+		profesionDocument.set_id(profession.getIdentification());
 		profesionDocument.setNom(profession.getName());
 		profesionDocument.setDes(validateDes(profession.getDescription()));
+//		log.info("Estudios: " + profession.getStudies());
 		profesionDocument.setEstudios(validateEstudios(profession.getStudies()));
 		return profesionDocument;
 	}
@@ -39,10 +43,10 @@ public class ProfesionMapperMongo {
 
 	public Profession fromAdapterToDomain(ProfesionDocument profesionDocument) {
 		Profession profession = new Profession();
-		profession.setIdentification(profesionDocument.getId());
+		profession.setIdentification(profesionDocument.get_id());
 		profession.setName(profesionDocument.getNom());
 		profession.setDescription(validateDescription(profesionDocument.getDes()));
-		profession.setStudies(validateStudies(profesionDocument.getEstudios()));
+//		profession.setStudies(validateStudies(profesionDocument.getEstudios()));
 		return profession;
 	}
 

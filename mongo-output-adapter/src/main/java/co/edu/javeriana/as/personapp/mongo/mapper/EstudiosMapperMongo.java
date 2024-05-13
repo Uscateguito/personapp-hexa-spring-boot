@@ -2,6 +2,7 @@ package co.edu.javeriana.as.personapp.mongo.mapper;
 
 import java.time.LocalDate;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import co.edu.javeriana.as.personapp.common.annotations.Mapper;
@@ -14,6 +15,7 @@ import co.edu.javeriana.as.personapp.mongo.document.ProfesionDocument;
 import lombok.NonNull;
 
 @Mapper
+@Slf4j
 public class EstudiosMapperMongo {
 
 	@Autowired
@@ -24,7 +26,7 @@ public class EstudiosMapperMongo {
 
 	public EstudiosDocument fromDomainToAdapter(Study study) {
 		EstudiosDocument estudio = new EstudiosDocument();
-		estudio.setId(validateId(study.getPerson().getIdentification(), study.getProfession().getIdentification()));
+		estudio.set_id(validateId(study.getPerson().getIdentification(), study.getProfession().getIdentification()));
 		estudio.setPrimaryPersona(validatePrimaryPersona(study.getPerson()));
 		estudio.setPrimaryProfesion(validatePrimaryProfesion(study.getProfession()));
 		estudio.setFecha(validateFecha(study.getGraduationDate()));
@@ -53,12 +55,13 @@ public class EstudiosMapperMongo {
 	}
 
 	public Study fromAdapterToDomain(EstudiosDocument estudiosDocument) {
+		log.info("Into fromAdapterToDomain in EstudiosMapperMongo");
 		Study study = new Study();
 		study.setPerson(personaMapperMongo.fromAdapterToDomain(estudiosDocument.getPrimaryPersona()));
 		study.setProfession(profesionMapperMongo.fromAdapterToDomain(estudiosDocument.getPrimaryProfesion()));
 		study.setGraduationDate(validateGraduationDate(estudiosDocument.getFecha()));
 		study.setUniversityName(validateUniversityName(estudiosDocument.getUniver()));
-		return null;
+		return study;
 	}
 
 	private LocalDate validateGraduationDate(LocalDate fecha) {

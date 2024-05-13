@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Document("persona")
 public class PersonaDocument {
 	@Id
-	private Integer id;
+	private Integer _id;
 	private String nombre;
 	private String apellido;
 	private String genero;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import co.edu.javeriana.as.personapp.common.annotations.Mapper;
@@ -17,6 +18,7 @@ import co.edu.javeriana.as.personapp.mongo.document.TelefonoDocument;
 import lombok.NonNull;
 
 @Mapper
+@Slf4j
 public class PersonaMapperMongo {
 
 	@Autowired
@@ -27,7 +29,7 @@ public class PersonaMapperMongo {
 
 	public PersonaDocument fromDomainToAdapter(Person person) {
 		PersonaDocument personaDocument = new PersonaDocument();
-		personaDocument.setId(person.getIdentification());
+		personaDocument.set_id(person.getIdentification());
 		personaDocument.setNombre(person.getFirstName());
 		personaDocument.setApellido(person.getLastName());
 		personaDocument.setGenero(validateGenero(person.getGender()));
@@ -58,14 +60,16 @@ public class PersonaMapperMongo {
 	}
 
 	public Person fromAdapterToDomain(PersonaDocument personaDocument) {
+		log.info("Into fromAdapterToDomain on PersonaMapperMongo");
+		log.info("personaDocument: " + personaDocument.toString());
 		Person person = new Person();
-		person.setIdentification(personaDocument.getId());
+		person.setIdentification(personaDocument.get_id());
 		person.setFirstName(personaDocument.getNombre());
 		person.setLastName(personaDocument.getApellido());
 		person.setGender(validateGender(personaDocument.getGenero()));
 		person.setAge(validateAge(personaDocument.getEdad()));
-		person.setStudies(validateStudies(personaDocument.getEstudios()));
-		person.setPhoneNumbers(validatePhones(personaDocument.getTelefonos()));
+//		person.setStudies(validateStudies(personaDocument.getEstudios()));
+//		person.setPhoneNumbers(validatePhones(personaDocument.getTelefonos()));
 		return person;
 	}
 
@@ -84,6 +88,8 @@ public class PersonaMapperMongo {
 	}
 
 	private List<Phone> validatePhones(List<TelefonoDocument> telefonosDocuments) {
+		log.info("Into validatePhones on Mapper MongoDB");
+		log.info("telefonosDocuments: " + telefonosDocuments.stream());
 		return telefonosDocuments != null && !telefonosDocuments.isEmpty() ? telefonosDocuments.stream()
 				.map(telefono -> telefonoMapperMongo.fromAdapterToDomain(telefono)).collect(Collectors.toList())
 				: new ArrayList<Phone>();

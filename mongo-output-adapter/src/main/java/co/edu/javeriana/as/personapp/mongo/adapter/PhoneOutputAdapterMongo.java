@@ -44,7 +44,8 @@ public class PhoneOutputAdapterMongo implements PhoneOutputPort {
 
     @Override
     public List<Phone> find() {
-        log.debug("Into find on Adapter MongoDB");
+        log.info("Into find on PhoneOutputAdapter");
+        log.info("Telefonos: " + telefonoRepositoryMongo.findAll());
         return telefonoRepositoryMongo.findAll().stream().map(telefonoMapperMongo::fromAdapterToDomain)
                 .collect(Collectors.toList());
     }

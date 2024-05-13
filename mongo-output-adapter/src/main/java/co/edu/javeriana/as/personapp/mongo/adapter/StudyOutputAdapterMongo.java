@@ -25,7 +25,7 @@ public class StudyOutputAdapterMongo implements StudyOutputPort {
 
     @Override
     public Study save(Study study) {
-        log.debug("Into save on Adapter MongoDB");
+        log.info("Into save on Adapter MongoDB");
         try {
             EstudiosDocument persistedEstudios = estudiosRepositoryMongo.save(estudiosMapperMongo.fromDomainToAdapter(study));
             return estudiosMapperMongo.fromAdapterToDomain(persistedEstudios);
@@ -43,28 +43,35 @@ public class StudyOutputAdapterMongo implements StudyOutputPort {
 
 //    @Override
 //    public Boolean delete(String identification) {
-//        log.debug("Into delete on Adapter MongoDB");
+//        log.info("Into delete on Adapter MongoDB");
 //        estudiosRepositoryMongo.deleteById(identification);
 //        return estudiosRepositoryMongo.findById(identification).isEmpty();
 //    }
 
     @Override
     public List<Study> find() {
-        log.debug("Into find on Adapter MongoDB");
+        log.info("Into find on StudyOutputAdapterMongo");
+        log.info("Studies: " + estudiosRepositoryMongo.findAll().toString());
         return estudiosRepositoryMongo.findAll().stream().map(estudiosMapperMongo::fromAdapterToDomain)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Study findById(Integer professionId, Integer personId) {
-//        TODO Auto-generated method stub
-        return null;
+        log.info("Into findById on Adapter MongoDB");
+        if (estudiosRepositoryMongo.findByPrimaryProfesionAndPrimaryPersona(professionId, personId) == null) {
+            return null;
+        } else {
+            return estudiosMapperMongo.fromAdapterToDomain(
+                    estudiosRepositoryMongo.findByPrimaryProfesionAndPrimaryPersona(professionId, personId)
+            );
+        }
     }
 
 
 //    @Override
 //    public Study findById(String identification) {
-//        log.debug("Into findById on Adapter MongoDB");
+//        log.info("Into findById on Adapter MongoDB");
 //        if (estudiosRepositoryMongo.findById(identification).isEmpty()) {
 //            return null;
 //        } else {
@@ -74,8 +81,7 @@ public class StudyOutputAdapterMongo implements StudyOutputPort {
 
     @Override
     public Long count() {
-        // TODO Auto-generated method stub
-        return null;
+        return estudiosRepositoryMongo.count();
     }
 
 }

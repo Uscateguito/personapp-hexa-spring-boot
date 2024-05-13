@@ -49,10 +49,13 @@ public class StudyInputAdapterRest {
     public List<StudyResponse> historial(String database) {
         if(setStudyOutputPortInjection(database).equalsIgnoreCase(DatabaseOption.MARIA.toString())){
             log.info("Into getStudies in StudyInputAdapterRest with MariaDB");
+            log.info("Studies: " + studyInputPort.findAll().toString());
             return studyInputPort.findAll().stream().map(studyMapperRest::fromDomainToAdapterRestMaria)
                     .collect(Collectors.toList());
         }else {
-            return studyInputPort.findAll().stream().map(studyMapperRest::fromDomainToAdapterRestMongo)
+            log.info("Into getStudies in StudyInputAdapterRest with MongoDB");
+//            log.info("Studies: " + studyInputPort.findAll().toString());
+            return studyInputPort.findAll().stream().map(study -> studyMapperRest.fromDomainToAdapterRestMongo(study))
                     .collect(Collectors.toList());
         }
     }

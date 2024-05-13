@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Document("estudios")
 public class EstudiosDocument {
 	@Id
-	private String id;
+	private String _id;
 	@DocumentReference(lazy = true)
 	private PersonaDocument primaryPersona;
 	@DocumentReference(lazy = true)

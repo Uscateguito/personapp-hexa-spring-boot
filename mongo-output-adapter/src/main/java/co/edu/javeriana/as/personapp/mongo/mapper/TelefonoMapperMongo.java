@@ -17,7 +17,7 @@ public class TelefonoMapperMongo {
 
 	public TelefonoDocument fromDomainToAdapter(Phone phone) {
 		TelefonoDocument telefonoDocument = new TelefonoDocument();
-		telefonoDocument.setId(phone.getNumber());
+		telefonoDocument.set_id(phone.getNumber());
 		telefonoDocument.setOper(phone.getCompany());
 		return telefonoDocument;
 	}
@@ -28,8 +28,9 @@ public class TelefonoMapperMongo {
 
 	public Phone fromAdapterToDomain(TelefonoDocument telefonoDocument) {
 		Phone phone = new Phone();
-		phone.setNumber(telefonoDocument.getId());
+		phone.setNumber(telefonoDocument.get_id());
 		phone.setCompany(telefonoDocument.getOper());
+		phone.setOwner(validateOwner(telefonoDocument.getPrimaryDuenio()));
 		return phone;
 	}
 

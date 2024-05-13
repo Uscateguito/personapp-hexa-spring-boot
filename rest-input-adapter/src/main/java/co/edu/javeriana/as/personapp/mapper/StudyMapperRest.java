@@ -6,11 +6,13 @@ import co.edu.javeriana.as.personapp.common.annotations.Mapper;
 import co.edu.javeriana.as.personapp.domain.Study;
 import co.edu.javeriana.as.personapp.model.request.StudyRequest;
 import co.edu.javeriana.as.personapp.model.response.StudyResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 
 @Mapper
+@Slf4j
 public class StudyMapperRest {
 
     @Autowired
@@ -29,6 +31,7 @@ public class StudyMapperRest {
         return fromDomainToAdapterRest(study, "MariaDB");
     }
     public StudyResponse fromDomainToAdapterRestMongo(Study study) {
+        log.info("Into fromDomainToAdapterRestMongo in StudyMapperRest");
         return fromDomainToAdapterRest(study, "MongoDB");
     }
 

@@ -29,7 +29,7 @@ public class PersonOutputAdapterMongo implements PersonOutputPort {
 	
 	@Override
 	public Person save(Person person) {
-		log.debug("Into save on Adapter MongoDB");
+		log.info("Into save on Adapter MongoDB");
 		try {
 			PersonaDocument persistedPersona = personaRepositoryMongo.save(personaMapperMongo.fromDomainToAdapter(person));
 			return personaMapperMongo.fromAdapterToDomain(persistedPersona);
@@ -41,21 +41,23 @@ public class PersonOutputAdapterMongo implements PersonOutputPort {
 
 	@Override
 	public Boolean delete(Integer identification) {
-		log.debug("Into delete on Adapter MongoDB");
+		log.info("Into delete on Adapter MongoDB");
 		personaRepositoryMongo.deleteById(identification);
 		return personaRepositoryMongo.findById(identification).isEmpty();
 	}
 
 	@Override
 	public List<Person> find() {
-		log.debug("Into find on Adapter MongoDB");
+		log.info("Into find on Adapter MongoDB");
+		log.info("persona: " + personaRepositoryMongo.findAll().stream().map(personaMapperMongo::fromAdapterToDomain)
+				.collect(Collectors.toList()));
 		return personaRepositoryMongo.findAll().stream().map(personaMapperMongo::fromAdapterToDomain)
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public Person findById(Integer identification) {
-		log.debug("Into findById on Adapter MongoDB");
+		log.info("Into findById on Adapter MongoDB");
 		if (personaRepositoryMongo.findById(identification).isEmpty()) {
 			return null;
 		} else {
@@ -65,8 +67,7 @@ public class PersonOutputAdapterMongo implements PersonOutputPort {
 
 	@Override
 	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return personaRepositoryMongo.count();
 	}
 
 }
