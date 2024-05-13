@@ -12,4 +12,6 @@ public interface StudyOutputPort {
         public Boolean delete(Integer identification);
         public List<Study> find();
         public Study findById(Integer identification);
+        public Integer count();
+
 }

@@ -58,4 +58,10 @@ public class TelefonoOutputAdapterMongo implements PhoneOutputPort {
             return telefonoMapperMongo.fromAdapterToDomain(telefonoRepositoryMongo.findById(identification).get());
         }
     }
+
+    @Override
+    public Integer count() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

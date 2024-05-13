@@ -13,4 +13,7 @@ public interface PhoneOutputPort {
     public Boolean delete(Integer identification);
     public List<Phone> find();
     public Phone findById(Integer identification);
+
+    public Integer count();
+
 }

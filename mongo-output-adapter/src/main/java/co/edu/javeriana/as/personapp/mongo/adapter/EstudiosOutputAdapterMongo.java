@@ -59,4 +59,10 @@ public class EstudiosOutputAdapterMongo implements StudyOutputPort {
         }
     }
 
+    @Override
+    public Integer count() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

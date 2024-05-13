@@ -12,4 +12,6 @@ public interface ProfesionOutputPort {
     public Boolean delete(Integer identification);
     public List<Profession> find();
     public Profession findById(Integer identification);
+    public Integer count();
+
 }

@@ -63,4 +63,10 @@ public class PersonOutputAdapterMongo implements PersonOutputPort {
 		}
 	}
 
+	@Override
+	public Integer count() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
