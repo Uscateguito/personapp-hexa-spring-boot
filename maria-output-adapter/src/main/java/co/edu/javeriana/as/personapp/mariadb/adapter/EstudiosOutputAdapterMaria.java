@@ -1,5 +1,6 @@
 package co.edu.javeriana.as.personapp.mariadb.adapter;
 
+import co.edu.javeriana.as.personapp.application.port.out.StudiesOutputPort;
 import co.edu.javeriana.as.personapp.common.annotations.Adapter;
 import co.edu.javeriana.as.personapp.domain.Study;
 import co.edu.javeriana.as.personapp.mariadb.mapper.EstudiosMapperMaria;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Adapter("EstudiosOutputAdapterMaria")
 @Transactional
-public class EstudiosOutputAdapterMaria {
+public class EstudiosOutputAdapterMaria implements StudiesOutputPort {
 
     @Autowired
     private EstudiosRepositoryMaria estudiosRepositoryMaria;
@@ -40,6 +41,11 @@ public class EstudiosOutputAdapterMaria {
         } else {
             return estudiosMapperMaria.fromAdapterToDomain(estudiosRepositoryMaria.findById(id).get());
         }
+    }
+
+    @Override
+    public Long count() {
+        return null;
     }
 
     public List<Study> find() {

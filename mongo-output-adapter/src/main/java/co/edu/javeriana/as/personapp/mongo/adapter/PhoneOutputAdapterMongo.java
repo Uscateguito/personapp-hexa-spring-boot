@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Adapter("telefonoOutputAdapterMongo")
-public class TelefonoOutputAdapterMongo implements PhoneOutputPort {
+@Adapter("PhoneOutputAdapterMongo")
+public class PhoneOutputAdapterMongo implements PhoneOutputPort {
 
     @Autowired
     private TelefonoRepositoryMongo telefonoRepositoryMongo;
@@ -35,12 +35,12 @@ public class TelefonoOutputAdapterMongo implements PhoneOutputPort {
         }
     }
 
-    @Override
-    public Boolean delete(Integer identification) {
-        log.debug("Into delete on Adapter MongoDB");
-        telefonoRepositoryMongo.deleteById(identification);
-        return telefonoRepositoryMongo.findById(identification).isEmpty();
-    }
+//    @Override
+//    public Boolean delete(Integer identification) {
+//        log.debug("Into delete on Adapter MongoDB");
+//        telefonoRepositoryMongo.deleteById(identification);
+//        return telefonoRepositoryMongo.findById(identification).isEmpty();
+//    }
 
     @Override
     public List<Phone> find() {
@@ -50,18 +50,17 @@ public class TelefonoOutputAdapterMongo implements PhoneOutputPort {
     }
 
     @Override
-    public Phone findById(Integer identification) {
+    public Phone findByNumber(String number) {
         log.debug("Into findById on Adapter MongoDB");
-        if (telefonoRepositoryMongo.findById(identification).isEmpty()) {
+        if (telefonoRepositoryMongo.findById(number).isEmpty()) {
             return null;
         } else {
-            return telefonoMapperMongo.fromAdapterToDomain(telefonoRepositoryMongo.findById(identification).get());
+            return telefonoMapperMongo.fromAdapterToDomain(telefonoRepositoryMongo.findById(number).get());
         }
     }
 
     @Override
-    public Integer count() {
-        // TODO Auto-generated method stub
-        return null;
+    public Long count() {
+        return telefonoRepositoryMongo.count();
     }
 }

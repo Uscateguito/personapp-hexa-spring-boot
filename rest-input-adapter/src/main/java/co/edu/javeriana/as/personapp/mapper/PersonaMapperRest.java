@@ -29,14 +29,19 @@ public class PersonaMapperRest {
 
 	public Person fromAdapterToDomain(PersonaRequest request) {
 //		IMPLEMENTAR
-
-		return Person.builder()
-				.identification(Integer.parseInt(request.getDni()))
-				.firstName(request.getFirstName())
-				.lastName(request.getLastName())
-				.age(Integer.parseInt(request.getAge()))
-				.gender(Gender.valueOf(request.getSex()))
-				.build();
+		try {
+			return Person.builder()
+					.identification(Integer.parseInt(request.getDni()))
+					.firstName(request.getFirstName())
+					.lastName(request.getLastName())
+					.age(Integer.parseInt(request.getAge()))
+					.gender(Gender.valueOf(request.getSex()))
+					.build();
+		}
+		catch (Exception e) {
+			e.getMessage();
+		}
+		return null;
 	}
 		
 }

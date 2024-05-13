@@ -1,5 +1,6 @@
 package co.edu.javeriana.as.personapp.mariadb.adapter;
 
+import co.edu.javeriana.as.personapp.application.port.out.ProfesionOutputPort;
 import co.edu.javeriana.as.personapp.common.annotations.Adapter;
 import co.edu.javeriana.as.personapp.domain.Profession;
 import co.edu.javeriana.as.personapp.mariadb.entity.ProfesionEntity;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Adapter("ProfesionOutputAdapterMaria")
 @Transactional
-public class ProfesionOutputAdapterMaria {
+public class ProfesionOutputAdapterMaria implements ProfesionOutputPort {
 
     @Autowired
     private ProfesionRepositoryMaria profesionRepositoryMaria;
@@ -42,6 +43,12 @@ public class ProfesionOutputAdapterMaria {
         } else {
             return profesionMapperMaria.fromAdapterToDomain(profesionRepositoryMaria.findById(id).get());
         }
+    }
+
+    @Override
+    public Long count() {
+//        return null;
+        return profesionRepositoryMaria.count();
     }
 
     public List<Profession> find() {

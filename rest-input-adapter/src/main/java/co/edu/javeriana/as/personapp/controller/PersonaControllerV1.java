@@ -21,39 +21,53 @@ public class PersonaControllerV1 {
 	private PersonaInputAdapterRest personaInputAdapterRest;
 	
 	@ResponseBody
-	@GetMapping(path = "/{database}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/getAll/{database}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<PersonaResponse> personas(@PathVariable String database) {
 		log.info("Into personas REST API");
 			return personaInputAdapterRest.historial(database.toUpperCase());
 	}
 	
 	@ResponseBody
-	@PostMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/create", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public PersonaResponse crearPersona(@RequestBody PersonaRequest request) {
 		log.info("esta en el metodo crearTarea en el controller del api");
 		return personaInputAdapterRest.crearPersona(request);
 	}
 
 	@ResponseBody
+	@PutMapping(path = "/edit/{identification}/{database}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public PersonaResponse editarPersona(@PathVariable Integer identification, @RequestBody PersonaRequest request, @PathVariable String database) {
+		log.info("Into editarPersona REST API");
+		return personaInputAdapterRest.editarPersona(identification, request, database.toUpperCase());
+	}
+
+	@ResponseBody
 	@GetMapping(path = "/count/{database}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public int persona(@PathVariable String database) {
+	public long persona(@PathVariable String database) {
 		log.info("Into persona REST API");
 		return personaInputAdapterRest.count(database.toUpperCase());
 	}
 
 	@ResponseBody
-	@GetMapping(path = "/{identification}/{database}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/getById/{identification}/{database}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public PersonaResponse persona(@PathVariable Integer identification, @PathVariable String database) {
 		log.info("Into persona REST API");
 		return personaInputAdapterRest.getById(identification, database.toUpperCase());
 	}
 
 	@ResponseBody
-	@GetMapping(path = "/{identification}/phones/{database}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<String> telefonos(@PathVariable Integer identification, @PathVariable String database) {
-		log.info("Into telefonos REST API");
-		return personaInputAdapterRest.getPhones(identification, database.toUpperCase());
+	@DeleteMapping(path = "/delete/{identification}/{database}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Boolean borrarPersona(@PathVariable Integer identification, @PathVariable String database) {
+		log.info("Into borrarPersona REST API");
+		return personaInputAdapterRest.borrarPersona(identification, database.toUpperCase());
 	}
+
+//	@ResponseBody
+//	@GetMapping(path = "/{identification}/phones/{database}", produces = MediaType.APPLICATION_JSON_VALUE)
+//	public List<String> telefonos(@PathVariable Integer identification, @PathVariable String database) {
+//		log.info("Into telefonos REST API");
+//		return personaInputAdapterRest.getPhones(identification, database.toUpperCase());
+//	}
 
 //	@ResponseBody
 //	@GetMapping(path = "/{identification}/studies/{database}", produces = MediaType.APPLICATION_JSON_VALUE)

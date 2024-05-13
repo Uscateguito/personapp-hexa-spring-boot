@@ -10,10 +10,10 @@ import java.util.List;
 public interface PhoneOutputPort {
 
     public Phone save(Phone phone);
-    public Boolean delete(Integer identification);
+//    public Boolean delete(String number);
     public List<Phone> find();
-    public Phone findById(Integer identification);
+    public Phone findByNumber(String number);
 
-    public Integer count();
+    public Long count();
 
 }

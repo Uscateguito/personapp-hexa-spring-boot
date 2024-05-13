@@ -62,7 +62,7 @@ public class ProfesionOutputAdapterMongo implements ProfesionOutputPort {
     }
 
     @Override
-    public Integer count() {
+    public Long count() {
         // TODO Auto-generated method stub
         return null;
     }

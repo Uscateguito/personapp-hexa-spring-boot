@@ -1,6 +1,7 @@
 package co.edu.javeriana.as.personapp.mariadb.adapter;
 
 
+import co.edu.javeriana.as.personapp.application.port.out.PhoneOutputPort;
 import co.edu.javeriana.as.personapp.common.annotations.Adapter;
 import co.edu.javeriana.as.personapp.domain.Phone;
 import co.edu.javeriana.as.personapp.mariadb.entity.TelefonoEntity;
@@ -14,9 +15,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Adapter("TelefonoOutputAdapterMaria")
+@Adapter("PhoneOutputAdapterMaria")
 @Transactional
-public class TelefonoOutputAdapterMaria {
+public class PhoneOutputAdapterMaria implements PhoneOutputPort {
 
     @Autowired
     private TelefonoRepositoryMaria telefonoRepositoryMaria;
@@ -30,25 +31,36 @@ public class TelefonoOutputAdapterMaria {
         return telefonoMapperMaria.fromAdapterToDomain(persistedTelefono);
     }
 
+//    @Override
+//    public Boolean delete(Integer identification) {
+//        return null;
+//    }
+
     public Boolean delete(String id) {
         log.debug("Into delete on Adapter MariaDB");
         telefonoRepositoryMaria.deleteById(id);
         return telefonoRepositoryMaria.findById(id).isEmpty();
     }
 
-    public Phone findById(String id) {
-        log.debug("Into findById on Adapter MariaDB");
-        if (telefonoRepositoryMaria.findById(id).isEmpty
-                ()) {
-            return null;
-        } else {
-            return telefonoMapperMaria.fromAdapterToDomain(telefonoRepositoryMaria.findById(id).get());
-        }
-    }
-
     public List<Phone> find() {
         log.debug("Into find on Adapter MariaDB");
         return telefonoRepositoryMaria.findAll().stream().map(telefonoMapperMaria::fromAdapterToDomain).collect(Collectors.toList());
+    }
+
+    @Override
+    public Phone findByNumber(String number) {
+        log.debug("Into findById on Adapter MariaDB");
+        if (telefonoRepositoryMaria.findById(number).isEmpty
+                ()) {
+            return null;
+        } else {
+            return telefonoMapperMaria.fromAdapterToDomain(telefonoRepositoryMaria.findById(number).get());
+        }
+    }
+
+    @Override
+    public Long count() {
+        return telefonoRepositoryMaria.count();
     }
 
 

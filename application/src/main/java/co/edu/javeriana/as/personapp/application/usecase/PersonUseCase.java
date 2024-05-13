@@ -49,6 +49,7 @@ public class PersonUseCase implements PersonInputPort {
 
 	@Override
 	public Boolean drop(Integer identification) throws NoExistException {
+		log.info("Into drop in PersonUseCase using PersonOutputPort");
 		Person oldPerson = personPersintence.findById(identification);
 		if (oldPerson != null)
 			return personPersintence.delete(identification);
@@ -58,14 +59,13 @@ public class PersonUseCase implements PersonInputPort {
 
 	@Override
 	public List<Person> findAll() {
-		log.info("Output: " + personPersintence.getClass());
+		log.info("Into findAll in PersonUseCase using PersonOutputPort");
 		return personPersintence.find();
 	}
 
 	@Override
 	public Person findOne(Integer identification) throws NoExistException {
-		log.info("Into findOne in Person Use Case using PersonOutputPort with" + personPersintence.toString());
-		log.info("Into findOne in Person Use Case using PersonOutputPort receiving" + personPersintence.findById(identification));
+		log.info("Into findOne in PersonUserCase using PersonOutputPort receiving" + personPersintence.findById(identification));
 		Person oldPerson = personPersintence.findById(identification);
 		if (oldPerson != null)
 			return oldPerson;
@@ -73,8 +73,9 @@ public class PersonUseCase implements PersonInputPort {
 	}
 
 	@Override
-	public Integer count() {
-		return findAll().size();
+	public Long count() {
+		log.info("Into count in PersonUseCase");
+		return personPersintence.count();
 	}
 
 	@Override

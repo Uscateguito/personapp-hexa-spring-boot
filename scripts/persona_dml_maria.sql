@@ -33,4 +33,5 @@ INSERT INTO estudios (id_prof, cc_per, fecha, univer) VALUES
 
 select * from telefono;
 select * from estudios;
+select * from persona;
 show tables;
