@@ -51,9 +51,11 @@ public class PersonaEntity implements Serializable {
 	private Integer edad;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "duenio")
+	@JsonIgnore
 	private List<TelefonoEntity> telefonos;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
+	@JsonIgnore
 	private List<EstudiosEntity> estudios;
 
 	public PersonaEntity() {

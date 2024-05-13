@@ -19,7 +19,6 @@ public class TelefonoMapperMongo {
 		TelefonoDocument telefonoDocument = new TelefonoDocument();
 		telefonoDocument.setId(phone.getNumber());
 		telefonoDocument.setOper(phone.getCompany());
-		telefonoDocument.setPrimaryDuenio(validateDuenio(phone.getOwner()));
 		return telefonoDocument;
 	}
 
@@ -31,7 +30,6 @@ public class TelefonoMapperMongo {
 		Phone phone = new Phone();
 		phone.setNumber(telefonoDocument.getId());
 		phone.setCompany(telefonoDocument.getOper());
-		phone.setOwner(validateOwner(telefonoDocument.getPrimaryDuenio()));
 		return phone;
 	}
 

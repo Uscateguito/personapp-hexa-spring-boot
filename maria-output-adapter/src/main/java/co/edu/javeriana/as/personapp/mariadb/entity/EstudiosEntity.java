@@ -1,7 +1,5 @@
 package co.edu.javeriana.as.personapp.mariadb.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -38,11 +36,9 @@ public class EstudiosEntity implements Serializable {
 	private String univer;
 	@JoinColumn(name = "cc_per", referencedColumnName = "cc", nullable = false, insertable = false, updatable = false)
 	@ManyToOne(optional = false)
-	@JsonIgnore
 	private PersonaEntity persona;
 	@JoinColumn(name = "id_prof", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
 	@ManyToOne(optional = false)
-	@JsonIgnore
 	private ProfesionEntity profesion;
 
 	public EstudiosEntity() {
