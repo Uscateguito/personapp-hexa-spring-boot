@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import co.edu.javeriana.as.personapp.common.annotations.Mapper;
@@ -12,6 +13,7 @@ import co.edu.javeriana.as.personapp.mariadb.entity.EstudiosEntity;
 import co.edu.javeriana.as.personapp.mariadb.entity.EstudiosEntityPK;
 
 @Mapper
+@Log4j2
 public class EstudiosMapperMaria {
 
 	@Autowired
@@ -43,15 +45,17 @@ public class EstudiosMapperMaria {
 
 	public Study fromAdapterToDomain(EstudiosEntity estudiosEntity) {
 		Study study = new Study();
-		study.setPerson(personaMapperMaria.fromAdapterToDomain(estudiosEntity.getPersona()));
-		study.setProfession(profesionMapperMaria.fromAdapterToDomain(estudiosEntity.getProfesion()));
+//		study.setPerson(personaMapperMaria.fromAdapterToDomain(estudiosEntity.getPersona()));
+//		study.setProfession(profesionMapperMaria.fromAdapterToDomain(estudiosEntity.getProfesion()));
 		study.setGraduationDate(validateGraduationDate(estudiosEntity.getFecha()));
 		study.setUniversityName(validateUniversityName(estudiosEntity.getUniver()));
 		return null;
 	}
 
 	private LocalDate validateGraduationDate(Date fecha) {
-		return fecha != null ? fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
+		log.info("Fecha: " + fecha);
+		Date fechaSafe = new Date(fecha.getTime());
+		return fechaSafe != null ? fechaSafe.toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
 	}
 
 	private String validateUniversityName(String univer) {

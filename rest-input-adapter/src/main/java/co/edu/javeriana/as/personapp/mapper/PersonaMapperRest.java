@@ -22,8 +22,9 @@ public class PersonaMapperRest {
 				person.getFirstName(), 
 				person.getLastName(), 
 				person.getAge()+"", 
-				person.getGender().toString(), 
+				person.getGender().toString(),
 				database,
+				person.getPhoneNumbers(),
 				"OK");
 	}
 

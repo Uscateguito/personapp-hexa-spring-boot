@@ -30,3 +30,4 @@ public interface PersonInputPort {
 
 	public List<Study> getStudies(Integer identification) throws NoExistException;
 }
+

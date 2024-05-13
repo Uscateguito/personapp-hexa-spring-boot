@@ -1,6 +1,6 @@
 use prueba_db
 
-db.persona.insertMany([
+db.persona_db.insertMany([
 	{
 		"_id": NumberInt(123456789),
 		"nombre": "Pepe",

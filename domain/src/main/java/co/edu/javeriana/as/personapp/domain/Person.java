@@ -19,9 +19,7 @@ public class Person {
 	@NonNull
 	private Gender gender;
 	private Integer age;
-	@ToString.Exclude
 	private List<Phone> phoneNumbers;
-	@ToString.Exclude
 	private List<Study> studies;
 
 	public Boolean isValidAge() {

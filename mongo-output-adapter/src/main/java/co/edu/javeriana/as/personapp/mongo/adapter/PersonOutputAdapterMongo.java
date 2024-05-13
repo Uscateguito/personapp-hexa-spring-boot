@@ -18,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Adapter("personOutputAdapterMongo")
 public class PersonOutputAdapterMongo implements PersonOutputPort {
+
+//	Los output adapters son equivalente a un service
 	
 	@Autowired
     private PersonaRepositoryMongo personaRepositoryMongo;

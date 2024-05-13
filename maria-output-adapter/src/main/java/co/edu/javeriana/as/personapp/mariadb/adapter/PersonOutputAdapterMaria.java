@@ -50,10 +50,11 @@ public class PersonOutputAdapterMaria implements PersonOutputPort {
 
 	@Override
 	public Person findById(Integer identification) {
-		log.debug("Into findById on Adapter MariaDB");
+		log.info("Into findById on Adapter MariaDB");
 		if (personaRepositoryMaria.findById(identification).isEmpty()) {
 			return null;
 		} else {
+			log.info("Objeto devuelto desde repo MariaDB: " + personaRepositoryMaria.findById(identification).get().toString());
 			return personaMapperMaria.fromAdapterToDomain(personaRepositoryMaria.findById(identification).get());
 		}
 	}
