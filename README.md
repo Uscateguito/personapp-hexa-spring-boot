@@ -1,6 +1,8 @@
 # Taller de Arquitectura de Software
 ## Arquitectura Hexagonal
 
+![Diseño sin título (2)](https://github.com/Uscateguito/personapp-hexa-spring-boot/assets/103542486/21989ad5-4de8-415d-9442-850f66dd6741)
+
 ### 1. Contexto
 
 La **arquitectura hexagonal**, también conocida como arquitectura de puertos y adaptadores, permite una separación clara entre la lógica de negocio de una aplicación y los dispositivos con los que se comunica, tales como bases de datos, sistemas de archivos y interfaces de usuario. En este proyecto, se utilizó la arquitectura hexagonal para organizar el código en distintas capas que interactúan a través de puertos y adaptadores definidos. Los componentes clave son:
