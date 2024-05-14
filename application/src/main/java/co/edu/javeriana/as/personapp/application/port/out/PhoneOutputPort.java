@@ -13,7 +13,6 @@ public interface PhoneOutputPort {
 //    public Boolean delete(String number);
     public List<Phone> find();
     public Phone findByNumber(String number);
-
     public Long count();
 
 }

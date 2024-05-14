@@ -68,14 +68,16 @@ public class PersonInputAdapterRest {
 
 	public PersonResponse crearPersona(PersonRequest request) {
 		try {
-			setPersonOutputPortInjection(request.getDatabase());
-			Person person = personInputPort.create(personMapperRest.fromAdapterToDomain(request));
-			return personMapperRest.fromDomainToAdapterRestMaria(person);
+			if(setPersonOutputPortInjection(request.getDatabase()).equalsIgnoreCase(DatabaseOption.MARIA.toString())){
+				log.info("Into crear PersonaEntity in PersonaInputAdapterRest with MariaDB");
+				return personMapperRest.fromDomainToAdapterRestMaria(personInputPort.create(personMapperRest.fromAdapterToDomain(request)));
+			}else {
+				return personMapperRest.fromDomainToAdapterRestMongo(personInputPort.create(personMapperRest.fromAdapterToDomain(request)));
+			}
 		} catch (InvalidOptionException e) {
 			log.warn(e.getMessage());
-			//return new PersonaResponse("", "", "", "", "", "", "");
+			return null;
 		}
-		return null;
 	}
 
 	public long count(String database) {

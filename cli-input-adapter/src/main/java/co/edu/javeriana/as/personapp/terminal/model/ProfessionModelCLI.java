@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonaModelCli {
-	private Integer cc;
-	private String nombre;
-	private String apellido;
-	private String genero;
-	private Integer edad;
+public class ProfessionModelCLI {
+    private Integer id;
+    private String name;
+    private String description;
+    private String db;
+
 }
